@@ -5,30 +5,39 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.jinyahuan.tool</groupId>
     <artifactId>silkworm-dao</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <properties>
-        <mybatis-generator-maven-plugin.version>1.3.6</mybatis-generator-maven-plugin.version>
+        <mvn-p.compiler.version>3.7.0</mvn-p.compiler.version>
+        <mvn-p.compiler.conf.source>1.8</mvn-p.compiler.conf.source>
+        <mvn-p.compiler.conf.target>1.8</mvn-p.compiler.conf.target>
+        <mvn-p.compiler.conf.encoding>UTF-8</mvn-p.compiler.conf.encoding>
+
+        <mybatis.mvn-p.generator.version>1.3.7</mybatis.mvn-p.generator.version>
+        <mybatis.mvn-p.generator.conf.verbose>true</mybatis.mvn-p.generator.conf.verbose>
+        <mybatis.mvn-p.generator.conf.overwrite>true</mybatis.mvn-p.generator.conf.overwrite>
     </properties>
 
-    <!--
-        Wiki: http://www.mybatis.org/generator/running/runningWithMaven.html
-        Sample step (Eclipse):
-            1. pom.xml
-            2. Run As
-            3. Maven build
-            4. Goals input this: mybatis-generator:generate
-            5. Run
-     -->
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${mvn-p.compiler.version}</version>
+                <configuration>
+                    <source>${mvn-p.compiler.conf.source}</source>
+                    <target>${mvn-p.compiler.conf.target}</target>
+                    <encoding>${mvn-p.compiler.conf.encoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>${mybatis-generator-maven-plugin.version}</version>
+                <version>${mybatis.mvn-p.generator.version}</version>
                 <configuration>
-                    <verbose>true</verbose>
-                    <overwrite>true</overwrite>
+                    <verbose>${mybatis.mvn-p.generator.conf.verbose}</verbose>
+                    <overwrite>${mybatis.mvn-p.generator.conf.overwrite}</overwrite>
                 </configuration>
             </plugin>
         </plugins>
