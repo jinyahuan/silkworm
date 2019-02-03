@@ -14,7 +14,7 @@
         <mvn-p.compiler.conf.target>1.8</mvn-p.compiler.conf.target>
         <mvn-p.compiler.conf.encoding>UTF-8</mvn-p.compiler.conf.encoding>
 
-        <mybatis.mvn-p.generator.version>1.3.7</mybatis.mvn-p.generator.version>
+        <mybatis.mvn-p.generator.version>1.4.0-SNAPSHOT</mybatis.mvn-p.generator.version>
         <mybatis.mvn-p.generator.conf.verbose>true</mybatis.mvn-p.generator.conf.verbose>
         <mybatis.mvn-p.generator.conf.overwrite>true</mybatis.mvn-p.generator.conf.overwrite>
     </properties>
@@ -31,6 +31,7 @@
                     <encoding>${mvn-p.compiler.conf.encoding}</encoding>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -42,4 +43,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype-oss-snapshots</id>
+            <name>Sonatype OSS Snapshots Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
