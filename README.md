@@ -5,7 +5,8 @@ The dream is to automatically generate the project base code, is about to start 
 ## Run way
 
 ### plugs help
-mybatis-generator wiki: http://www.mybatis.org/generator/running/runningWithMaven.html
+mybatis-generator wiki: http://www.mybatis.org/generator/running/runningWithMaven.html    
+mybatis-generator + lombok: https://github.com/WGKLoveStudy/mbg_lombok_plugin    
 
 ### step for eclipse
 1. pom.xml
