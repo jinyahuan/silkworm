@@ -3,18 +3,18 @@
         "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-    <!-- Reset location -->
-    <classPathEntry
-            location="C:\Users\your\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar"/>
+    <!-- NOTICE: Reset location, e.g. location="E:\dev\studio\jinyahuan\silkworm\mysql-connector-java-5.1.40.jar" -->
+    <classPathEntry location=""/>
 
     <context id="context1" targetRuntime="MyBatis3">
-        <!-- Mybatis-Generator supplied plugins: http://www.mybatis.org/generator/reference/plugins.html -->
-        <!--        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin">
-                    <property name="useEqualsHashCodeFromRoot " value="java.lang.Object"/>
-                </plugin> -->
-        <plugin type="org.mybatis.generator.plugins.SerializablePlugin">
-            <property name="suppressJavaInterface  " value="false"/>
-            <property name="addGWTInterface   " value="false"/>
+        <!-- Mybatis-Generator supplied plugins: http://www.mybatis.org/generator/reference/plugins.html
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/> -->
+
+        <!-- https://github.com/WGKLoveStudy/mbg_lombok_plugin -->
+        <plugin type="org.mybatis.generator.plugins.lombok.LombokPlugin">
+            <property name="customLombok" value="@Builder,@AllArgsConstructor,@NoArgsConstructor,@Getter,@Setter"/>
         </plugin>
 
         <commentGenerator>
