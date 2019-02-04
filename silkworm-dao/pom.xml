@@ -20,11 +20,19 @@
 
         <mvn-p.mbg.lombok.version>1.0-SNAPSHOT</mvn-p.mbg.lombok.version>
 
+        <mybatis-generator-plugin.version>1.2.17</mybatis-generator-plugin.version>
         <lombok.version>1.18.4</lombok.version>
         <mysql-connector-java.version>5.1.40</mysql-connector-java.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.itfsw</groupId>
+            <artifactId>mybatis-generator-plugin</artifactId>
+            <version>${mybatis-generator-plugin.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -66,6 +74,11 @@
                         <version>${mvn-p.mbg.lombok.version}</version>
                         <scope>system</scope>
                         <systemPath>${project.basedir}/thirdparty/mbg.lombok-${mvn-p.mbg.lombok.version}.jar</systemPath>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.itfsw</groupId>
+                        <artifactId>mybatis-generator-plugin</artifactId>
+                        <version>${mybatis-generator-plugin.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
