@@ -1,0 +1,25 @@
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata
+bin/
+
+# Java
+*.class
+*.jar
+*.war
+
+# JetBrains
+.idea/
+.idea_modules/
+out/
+*.ipr
+*.iws
+*.iml
+
+# Log file
+*.log
+
+# Maven
+target/
