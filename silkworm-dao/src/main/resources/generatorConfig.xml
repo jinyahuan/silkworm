@@ -12,6 +12,9 @@
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/> -->
 
+        <!-- Overwriting *Mapper.xml files. -->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
         <!-- https://github.com/WGKLoveStudy/mbg_lombok_plugin -->
         <plugin type="org.mybatis.generator.plugins.lombok.LombokPlugin">
             <property name="customLombok" value="@Builder,@AllArgsConstructor,@NoArgsConstructor,@Getter,@Setter"/>
