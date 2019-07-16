@@ -3,8 +3,9 @@
         "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-    <!-- NOTICE: Reset location, e.g. location="E:\dev\studio\jinyahuan\silkworm\mysql-connector-java-5.1.40.jar" -->
-    <classPathEntry location=""/>
+    <properties resource="config.properties"/>
+
+    <classPathEntry location="${mysql-connector.filepath}"/>
 
     <context id="context1" targetRuntime="MyBatis3">
         <!-- Mybatis-Generator supplied plugins: http://www.mybatis.org/generator/reference/plugins.html
@@ -17,7 +18,7 @@
 
         <!-- https://github.com/WGKLoveStudy/mbg_lombok_plugin -->
         <plugin type="org.mybatis.generator.plugins.lombok.LombokPlugin">
-            <property name="customLombok" value="@Builder,@AllArgsConstructor,@NoArgsConstructor,@Getter,@Setter"/>
+            <property name="customLombok" value="@Getter,@Setter,@ToString"/>
         </plugin>
 
         <!-- https://github.com/itfsw/mybatis-generator-plugin -->
@@ -31,30 +32,28 @@
         </commentGenerator>
 
         <jdbcConnection
-                driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/silkworm_demo?useUnicode=true&amp;characterEncoding=UTF-8"
-                userId="db_userName"
-                password="db_userPwd"/>
+                driverClass="${datasource.driverClassName}"
+                connectionURL="${datasource.url}"
+                userId="${datasource.username}"
+                password="${datasource.password}"/>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="true"/>
-            <property name="useJSR310Types" value="false"/>
+            <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
-        <!-- targetProject="D:\absolute_path\domain" -->
-        <javaModelGenerator targetProject="./src/main/java"
-                            targetPackage="cn.jinyahuan.tool.silkworm.domain.dte">
+        <javaModelGenerator targetProject="${generator.model.targetDirectory}"
+                            targetPackage="${generator.model.targetPackage}">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="false"/>
             <property name="immutable" value="false"/>
         </javaModelGenerator>
-        <!-- ./src/main/resources -->
-        <sqlMapGenerator targetProject="./src/main/java"
-                         targetPackage="cn.jinyahuan.tool.silkworm.mapper">
+        <sqlMapGenerator targetProject="${generator.mapper.xml.targetDirectory}"
+                         targetPackage="${generator.mapper.xml.targetPackage}">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
-        <javaClientGenerator targetProject="./src/main/java"
-                             targetPackage="cn.jinyahuan.tool.silkworm.mapper"
+        <javaClientGenerator targetProject="${generator.mapper.java.targetDirectory}"
+                             targetPackage="${generator.mapper.java.targetPackage}"
                              type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
@@ -63,9 +62,9 @@
                tableName="t_tab1"
                domainObjectName="Table"
                mapperName="TableDao"
-               enableCountByExample="false"
+               enableSelectByExample="true"
+               enableCountByExample="true"
                enableDeleteByExample="false"
-               enableSelectByExample="false"
                enableUpdateByExample="false">
             <property name="useActualColumnNames" value="false"/> <!-- (0..N) this elements -->
             <property name="modelOnly" value="false"/>
@@ -87,9 +86,9 @@
         <table tableName="%"
                domainObjectName=""
                mapperName=""
-               enableCountByExample="false"
+               enableSelectByExample="true"
+               enableCountByExample="true"
                enableDeleteByExample="false"
-               enableSelectByExample="false"
                enableUpdateByExample="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/> <!-- (0..1) this elements -->
             <domainObjectRenamingRule searchString="^T" replaceString=""/> <!-- (0..1) this elements -->
