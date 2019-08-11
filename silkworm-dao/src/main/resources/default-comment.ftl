@@ -19,12 +19,18 @@
     </comment>
 
     <comment ID="addModelClassComment">
+<![CDATA[
 /**
- * ${introspectedTable.getRemarks()}(${introspectedTable.fullyQualifiedTable})。
+<#if introspectedTable.getRemarks()?? && introspectedTable.getRemarks()?trim != "">
+ * ${introspectedTable.getRemarks()}。
  *
- * @author Yahuan Jin
+</#if>
+ * <p>Table Name: ${introspectedTable.fullyQualifiedTable}.</p>
+ *
+ * @author Author Name
  * @since 2.0
  */
+]]>
     </comment>
 
     <comment ID="addFieldComment">
@@ -37,7 +43,7 @@
         </#list>
  *
     </#if>
- * ${introspectedTable.fullyQualifiedTable}.${introspectedColumn.actualColumnName}
+ * <p>Column Name: ${introspectedColumn.actualColumnName}.</p>
  */
 <#else>
 /**

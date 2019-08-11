@@ -35,7 +35,9 @@
                 driverClass="${datasource.driverClassName}"
                 connectionURL="${datasource.url}"
                 userId="${datasource.username}"
-                password="${datasource.password}"/>
+                password="${datasource.password}">
+            <property name="useInformationSchema" value="true" />
+        </jdbcConnection>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="true"/>
