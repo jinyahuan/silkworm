@@ -48,11 +48,14 @@
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetProject="${generator.model.targetDirectory}"
-                            targetPackage="${generator.model.targetPackage}">
-            <property name="enableSubPackages" value="false"/>
-            <property name="trimStrings" value="false"/>
-            <property name="immutable" value="false"/>
+        <javaModelGenerator
+                targetProject="${javaModelGenerator.targetDirectory}"
+                targetPackage="${javaModelGenerator.targetPackage}">
+            <property name="enableSubPackages"    value="${javaModelGenerator.property.enableSubPackages}"/>
+            <property name="trimStrings"          value="${javaModelGenerator.property.trimStrings}"/>
+            <property name="immutable"            value="${javaModelGenerator.property.immutable}"/>
+            <property name="exampleTargetProject" value="${javaModelGenerator.property.exampleTargetDirectory}"/>
+            <property name="exampleTargetPackage" value="${javaModelGenerator.property.exampleTargetPackage}"/>
         </javaModelGenerator>
         <sqlMapGenerator targetProject="${generator.mapper.xml.targetDirectory}"
                          targetPackage="${generator.mapper.xml.targetPackage}">
