@@ -37,9 +37,18 @@
 <![CDATA[
 <#if introspectedColumn??>
 /**
-    <#if introspectedColumn.remarks?? && introspectedColumn.remarks != "">
+    <#if introspectedColumn.remarks?? && introspectedColumn.remarks?trim != "">
         <#list introspectedColumn.remarks?split("\n") as remark>
- * ${remark}
+            <#assign tRemark = remark?trim />
+            <#if tRemark != "">
+                <#if !tRemark?matches(".*。$")>
+                    <#assign tRemark = tRemark + "。" />
+                </#if>
+                <#if (remark_index > 0) >
+                    <#assign tRemark = "<p>" + tRemark + "</p>" />
+                </#if>
+ * ${tRemark}
+            </#if>
         </#list>
  *
     </#if>
