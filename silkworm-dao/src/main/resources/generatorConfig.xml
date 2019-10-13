@@ -62,10 +62,11 @@
                 targetPackage="${sqlMapGenerator.targetPackage}">
             <property name="enableSubPackages" value="${sqlMapGenerator.property.enableSubPackages}"/>
         </sqlMapGenerator>
-        <javaClientGenerator targetProject="${generator.mapper.java.targetDirectory}"
-                             targetPackage="${generator.mapper.java.targetPackage}"
-                             type="XMLMAPPER">
-            <property name="enableSubPackages" value="false"/>
+        <javaClientGenerator
+                targetProject="${javaClientGenerator.targetDirectory}"
+                targetPackage="${javaClientGenerator.targetPackage}"
+                type="${javaClientGenerator.type}">
+            <property name="enableSubPackages" value="${javaClientGenerator.property.enableSubPackages}"/>
         </javaClientGenerator>
 
         <table schema="database_name"
