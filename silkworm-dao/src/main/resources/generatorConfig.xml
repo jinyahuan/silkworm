@@ -57,9 +57,10 @@
             <property name="exampleTargetProject" value="${javaModelGenerator.property.exampleTargetDirectory}"/>
             <property name="exampleTargetPackage" value="${javaModelGenerator.property.exampleTargetPackage}"/>
         </javaModelGenerator>
-        <sqlMapGenerator targetProject="${generator.mapper.xml.targetDirectory}"
-                         targetPackage="${generator.mapper.xml.targetPackage}">
-            <property name="enableSubPackages" value="false"/>
+        <sqlMapGenerator
+                targetProject="${sqlMapGenerator.targetDirectory}"
+                targetPackage="${sqlMapGenerator.targetPackage}">
+            <property name="enableSubPackages" value="${sqlMapGenerator.property.enableSubPackages}"/>
         </sqlMapGenerator>
         <javaClientGenerator targetProject="${generator.mapper.java.targetDirectory}"
                              targetPackage="${generator.mapper.java.targetPackage}"
