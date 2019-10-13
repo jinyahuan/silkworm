@@ -27,16 +27,20 @@
         </plugin>
 
         <commentGenerator>
-            <property name="suppressAllComments" value="true"/>
-            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="${commentGenerator.property.suppressAllComments}"/>
+            <property name="suppressDate"        value="${commentGenerator.property.suppressDate}"/>
         </commentGenerator>
 
         <jdbcConnection
-                driverClass="${datasource.driverClassName}"
-                connectionURL="${datasource.url}"
-                userId="${datasource.username}"
-                password="${datasource.password}">
-            <property name="useInformationSchema" value="true" />
+                driverClass="${jdbcConnection.driverClassName}"
+                connectionURL="${jdbcConnection.connectionURL}"
+                userId="${jdbcConnection.userId}"
+                password="${jdbcConnection.password}">
+            <property name="useInformationSchema"    value="${jdbcConnection.property.useInformationSchema}"/>
+            <property name="useUnicode"              value="${jdbcConnection.property.useUnicode}"/>
+            <property name="characterEncoding"       value="${jdbcConnection.property.characterEncoding}"/>
+            <property name="serverTimezone"          value="${jdbcConnection.property.serverTimezone}"/>
+            <property name="nullCatalogMeansCurrent" value="${jdbcConnection.property.nullCatalogMeansCurrent}"/>
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -44,20 +48,25 @@
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetProject="${generator.model.targetDirectory}"
-                            targetPackage="${generator.model.targetPackage}">
-            <property name="enableSubPackages" value="false"/>
-            <property name="trimStrings" value="false"/>
-            <property name="immutable" value="false"/>
+        <javaModelGenerator
+                targetProject="${javaModelGenerator.targetDirectory}"
+                targetPackage="${javaModelGenerator.targetPackage}">
+            <property name="enableSubPackages"    value="${javaModelGenerator.property.enableSubPackages}"/>
+            <property name="trimStrings"          value="${javaModelGenerator.property.trimStrings}"/>
+            <property name="immutable"            value="${javaModelGenerator.property.immutable}"/>
+            <property name="exampleTargetProject" value="${javaModelGenerator.property.exampleTargetDirectory}"/>
+            <property name="exampleTargetPackage" value="${javaModelGenerator.property.exampleTargetPackage}"/>
         </javaModelGenerator>
-        <sqlMapGenerator targetProject="${generator.mapper.xml.targetDirectory}"
-                         targetPackage="${generator.mapper.xml.targetPackage}">
-            <property name="enableSubPackages" value="false"/>
+        <sqlMapGenerator
+                targetProject="${sqlMapGenerator.targetDirectory}"
+                targetPackage="${sqlMapGenerator.targetPackage}">
+            <property name="enableSubPackages" value="${sqlMapGenerator.property.enableSubPackages}"/>
         </sqlMapGenerator>
-        <javaClientGenerator targetProject="${generator.mapper.java.targetDirectory}"
-                             targetPackage="${generator.mapper.java.targetPackage}"
-                             type="XMLMAPPER">
-            <property name="enableSubPackages" value="false"/>
+        <javaClientGenerator
+                targetProject="${javaClientGenerator.targetDirectory}"
+                targetPackage="${javaClientGenerator.targetPackage}"
+                type="${javaClientGenerator.type}">
+            <property name="enableSubPackages" value="${javaClientGenerator.property.enableSubPackages}"/>
         </javaClientGenerator>
 
         <table schema="database_name"
