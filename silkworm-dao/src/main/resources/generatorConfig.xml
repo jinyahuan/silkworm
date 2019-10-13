@@ -36,7 +36,11 @@
                 connectionURL="${datasource.url}"
                 userId="${datasource.username}"
                 password="${datasource.password}">
-            <property name="useInformationSchema" value="true" />
+            <property name="useInformationSchema" value="${datasource.url.param.useInformationSchema}"/>
+            <property name="useUnicode" value="${datasource.url.param.useUnicode}"/>
+            <property name="characterEncoding" value="${datasource.url.param.characterEncoding}"/>
+            <property name="serverTimezone" value="${datasource.url.param.serverTimezone}"/>
+            <property name="nullCatalogMeansCurrent" value="${datasource.url.param.nullCatalogMeansCurrent}"/>
         </jdbcConnection>
 
         <javaTypeResolver>
