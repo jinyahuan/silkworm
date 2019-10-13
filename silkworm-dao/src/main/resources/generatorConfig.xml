@@ -32,15 +32,15 @@
         </commentGenerator>
 
         <jdbcConnection
-                driverClass="${datasource.driverClassName}"
-                connectionURL="${datasource.url}"
-                userId="${datasource.username}"
-                password="${datasource.password}">
-            <property name="useInformationSchema" value="${datasource.url.param.useInformationSchema}"/>
-            <property name="useUnicode" value="${datasource.url.param.useUnicode}"/>
-            <property name="characterEncoding" value="${datasource.url.param.characterEncoding}"/>
-            <property name="serverTimezone" value="${datasource.url.param.serverTimezone}"/>
-            <property name="nullCatalogMeansCurrent" value="${datasource.url.param.nullCatalogMeansCurrent}"/>
+                driverClass="${jdbcConnection.driverClassName}"
+                connectionURL="${jdbcConnection.connectionURL}"
+                userId="${jdbcConnection.userId}"
+                password="${jdbcConnection.password}">
+            <property name="useInformationSchema"    value="${jdbcConnection.property.useInformationSchema}"/>
+            <property name="useUnicode"              value="${jdbcConnection.property.useUnicode}"/>
+            <property name="characterEncoding"       value="${jdbcConnection.property.characterEncoding}"/>
+            <property name="serverTimezone"          value="${jdbcConnection.property.serverTimezone}"/>
+            <property name="nullCatalogMeansCurrent" value="${jdbcConnection.property.nullCatalogMeansCurrent}"/>
         </jdbcConnection>
 
         <javaTypeResolver>
