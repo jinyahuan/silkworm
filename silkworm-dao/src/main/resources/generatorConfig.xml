@@ -11,7 +11,12 @@
         <!-- Mybatis-Generator supplied plugins: http://www.mybatis.org/generator/reference/plugins.html
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
-        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/> -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+            <property name="replaceString" value="EO"/>
+        </plugin>
+        -->
 
         <!-- Overwriting *Mapper.xml files. -->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
