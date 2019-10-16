@@ -22,7 +22,7 @@
 
         <mybatis-generator-plugin.version>1.2.17</mybatis-generator-plugin.version>
         <lombok.version>1.18.4</lombok.version>
-        <mysql-connector-java.version>5.1.40</mysql-connector-java.version>
+        <mysql-connector-java.version>5.1.48</mysql-connector-java.version>
     </properties>
 
     <dependencies>
