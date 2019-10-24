@@ -11,7 +11,12 @@
         <!-- Mybatis-Generator supplied plugins: http://www.mybatis.org/generator/reference/plugins.html
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
-        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/> -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+            <property name="replaceString" value="EO"/>
+        </plugin>
+        -->
 
         <!-- Overwriting *Mapper.xml files. -->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
@@ -69,50 +74,38 @@
             <property name="enableSubPackages" value="${javaClientGenerator.property.enableSubPackages}"/>
         </javaClientGenerator>
 
-        <table schema="database_name"
-               tableName="t_tab1"
-               domainObjectName="Table"
-               mapperName="TableDao"
-               enableSelectByExample="true"
-               enableCountByExample="true"
-               enableDeleteByExample="false"
-               enableUpdateByExample="false">
-            <property name="useActualColumnNames" value="false"/> <!-- (0..N) this elements -->
-            <property name="modelOnly" value="false"/>
-
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/> <!-- (0..1) this elements -->
-            <domainObjectRenamingRule searchString="^T" replaceString=""/> <!-- (0..1) this elements -->
-            <columnRenamingRule searchString="^vf_" replaceString=""/> <!-- (0..1) this elements -->
-
-            <columnOverride column="create_time"
-                            property="createDate"
-                            javaType="java.time.LocalDateTime"
-                            jdbcType="TIMESTAMP"/> <!-- (0..N) this elements -->
-            <columnOverride column="birthday" javaType="java.time.LocalDate" jdbcType="DATE"/>
-            <columnOverride column="remark2" javaType="java.lang.String" jdbcType="VARCHAR" isGeneratedAlways="true"/>
-
-            <ignoreColumn column="remark3"/> <!-- (0..N) this elements -->
-        </table>
-        <!-- tableName="%": % for all tables -->
-        <table tableName="%"
+        <!-- (0..N) table elements -->
+        <!-- tableName="%": for all tables -->
+        <table schema=""
+               tableName="t_test"
                domainObjectName=""
                mapperName=""
                enableSelectByExample="true"
                enableCountByExample="true"
                enableDeleteByExample="false"
                enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/> <!-- (0..1) this elements -->
-            <domainObjectRenamingRule searchString="^T" replaceString=""/> <!-- (0..1) this elements -->
-            <columnRenamingRule searchString="^vf_" replaceString=""/> <!-- (0..1) this elements -->
+            <!-- (0..N) property elements -->
+            <property name="useActualColumnNames" value="false"/>
+            <property name="modelOnly" value="false"/>
 
-            <columnOverride column="create_time"
-                            property="createDate"
-                            javaType="java.time.LocalDateTime"
-                            jdbcType="TIMESTAMP"/> <!-- (0..N) this elements -->
-            <columnOverride column="birthday" javaType="java.time.LocalDate" jdbcType="DATE"/>
-            <columnOverride column="remark2" javaType="java.lang.String" jdbcType="VARCHAR" isGeneratedAlways="true"/>
+            <!-- (0..1) generatedKey elements -->
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <!-- (0..1) domainObjectRenamingRule elements -->
+            <domainObjectRenamingRule searchString="^T" replaceString=""/>
+            <!-- (0..1) columnRenamingRule elements -->
+            <columnRenamingRule searchString="^vf_" replaceString=""/>
 
-            <ignoreColumn column="remark3"/> <!-- (0..N) this elements -->
+            <!-- (0..N) columnOverride elements -->
+            <columnOverride column="ipv4_address" jdbcType="INTEGER"   javaType="java.lang.Long"/>
+            <columnOverride column="state_flag"   jdbcType="TINYINT"   javaType="java.lang.Short"/>
+            <columnOverride column="sort_weight"  jdbcType="TINYINT"   javaType="java.lang.Short"/>
+            <columnOverride column="delete_flag"  jdbcType="TINYINT"   javaType="java.lang.Short"/>
+            <columnOverride column="test_time"    jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" property="TestDate"/>
+            <columnOverride column="birthday"     jdbcType="DATE"      javaType="java.time.LocalDate"/>
+            <columnOverride column="remark9"      jdbcType="VARCHAR"   javaType="java.lang.String" isGeneratedAlways="true"/>
+
+            <!-- (0..N) ignoreColumn elements -->
+             <ignoreColumn column="remark8"/>
         </table>
     </context>
 </generatorConfiguration>
