@@ -12,51 +12,30 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
- * 临时用的 java 文件 comment 插件。
- * todo comment 模板化
+ * Java comment 插件。
+ * todo 优化
  *
  * @author Yahuan Jin
- * @since 1.0
+ * @since 2.1
  */
 public class JavaFileCommentPlugin extends PluginAdapter {
     private static final String PROPERTY_NAME_IS_ADD_TABLE_INFO = "isAddTableInfo";
     private static final String PROPERTY_NAME_ADD_TABLE_INFO_POSITION = "tableInfoPosition";
     private static final String PROPERTY_NAME_IS_ADD_TABLE_FIELD_INFO = "isAddTableFieldInfo";
     private static final String PROPERTY_NAME_TABLE_FIELD_INFO_POSITION = "tableFieldInfoPosition";
+    private static final String PROPERTY_NAME_COMMENT_FILE_NAME = "commentFileName";
 
-    private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String LINE_SEPARATOR = "\n";
 
-
-    protected String fileHeaderComment = new StringBuilder()
-            .append("/*").append(LINE_SEPARATOR)
-            // --- 拓展的注释写在中间
-            .append(" * Copyright 2018-2020 The Silkworm Authors").append(LINE_SEPARATOR)
-            // ---
-            .append(" */").append(LINE_SEPARATOR)
-            .toString();
-
-    protected String classComment = new StringBuilder()
-            .append("/**").append(LINE_SEPARATOR)
-            // --- 拓展的注释写在中间
-            .append(" * @author Yahuan Jin").append(LINE_SEPARATOR)
-            .append(" * @since 1.0").append(LINE_SEPARATOR)
-            // ---
-            .append(" */").append(LINE_SEPARATOR)
-            .toString();
     protected boolean isAddTableInfo = false;
     protected boolean isAddTableInfoToClassCommentHeader = true;
 
-    protected String fieldComment = new StringBuilder()
-            .append("/**").append(LINE_SEPARATOR)
-            // --- 拓展的注释写在中间
-            // ---
-            .append(" */").append(LINE_SEPARATOR)
-            .toString();
     protected boolean isAddTableFieldInfo = false;
     protected boolean isAddFieldInfoToFieldCommentHeader = true;
+
+    private JavaFileCommentResource commentResource = null;
 
     // - - -
 
@@ -66,6 +45,7 @@ public class JavaFileCommentPlugin extends PluginAdapter {
         String addTableInfoPositionProp = properties.getProperty(PROPERTY_NAME_ADD_TABLE_INFO_POSITION);
         String isAddTableFieldInfoProp = properties.getProperty(PROPERTY_NAME_IS_ADD_TABLE_FIELD_INFO);
         String tableFieldInfoPositionProp = properties.getProperty(PROPERTY_NAME_TABLE_FIELD_INFO_POSITION);
+        String commentFileNameProp = properties.getProperty(PROPERTY_NAME_COMMENT_FILE_NAME);
 
         if (Boolean.TRUE.toString().equals(isAddTableInfoProp)) {
             isAddTableInfo = true;
@@ -80,6 +60,8 @@ public class JavaFileCommentPlugin extends PluginAdapter {
             }
         }
 
+        commentResource = new JavaFileCommentResource(commentFileNameProp);
+
         return true;
     }
 
@@ -87,9 +69,11 @@ public class JavaFileCommentPlugin extends PluginAdapter {
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass,
                                                  IntrospectedTable introspectedTable)
     {
-        addJavaFileComment(topLevelClass, fileHeaderComment);
+        addJavaFileComment(topLevelClass,
+                commentResource.getCommentConfig(JavaFileCommentResource.HEADER_COMMENT));
 
-        List<String> comments = spiltCommentByLineSeparator(classComment);
+        List<String> comments = spiltCommentByLineSeparator(
+                commentResource.getCommentConfig(JavaFileCommentResource.CLASS_COMMENT));
         if (!comments.isEmpty()) {
             if (isAddTableInfo) {
                 addTableInfoToClassCommentHeader(comments, introspectedTable, isAddTableInfoToClassCommentHeader);
@@ -111,7 +95,8 @@ public class JavaFileCommentPlugin extends PluginAdapter {
                                        IntrospectedTable introspectedTable,
                                        ModelClassType modelClassType)
     {
-        List<String> comments = spiltCommentByLineSeparator(fieldComment);
+        List<String> comments = spiltCommentByLineSeparator(
+                commentResource.getCommentConfig(JavaFileCommentResource.FIELD_COMMENT));
         if (!comments.isEmpty()) {
             if (isAddTableFieldInfo) {
                 addFieldInfoToFieldCommentHeader(comments, introspectedColumn, isAddFieldInfoToFieldCommentHeader);
@@ -142,7 +127,7 @@ public class JavaFileCommentPlugin extends PluginAdapter {
 
     protected static List<String> spiltCommentByLineSeparator(final String str) {
         List<String> result = new ArrayList<>();
-        if (isNotEmpty(str)) {
+        if (StringUtils.isNotEmpty(str)) {
             String[] arr = str.split(LINE_SEPARATOR);
             if (arr.length > 0) {
                 for (String s : arr) {
@@ -158,11 +143,11 @@ public class JavaFileCommentPlugin extends PluginAdapter {
                                                   boolean isAddTableInfoToClassCommentHeader)
     {
         String tableName = introspectedTable.getFullyQualifiedTable().getIntrospectedTableName();
-        if (isNotBlank(tableName)) {
+        if (StringUtils.isNotBlank(tableName)) {
             String tableComment = " * table: " + tableName.trim();
 
             String tableRemark = introspectedTable.getRemarks();
-            if (isNotBlank(tableRemark)) {
+            if (StringUtils.isNotBlank(tableRemark)) {
                 tableComment += " (" + tableRemark.trim() + ")。";
             }
 
@@ -182,11 +167,11 @@ public class JavaFileCommentPlugin extends PluginAdapter {
                                                   boolean isAddFieldInfoToFieldCommentHeader)
     {
         String fieldName = introspectedColumn.getActualColumnName();
-        if (isNotBlank(fieldName)) {
+        if (StringUtils.isNotBlank(fieldName)) {
             String fieldComment = " * field: " + fieldName.trim();
 
             String fieldRemark = introspectedColumn.getRemarks();
-            if (isNotBlank(fieldRemark)) {
+            if (StringUtils.isNotBlank(fieldRemark)) {
                 fieldComment += " (" + fieldRemark.trim() + ")。";
             }
 
@@ -198,23 +183,5 @@ public class JavaFileCommentPlugin extends PluginAdapter {
                 list.add(list.size() - 1, fieldComment);
             }
         }
-    }
-
-    // - - -
-
-    private static boolean isEmpty(final String str) {
-        return Objects.isNull(str) || str.isEmpty();
-    }
-
-    private static boolean isNotEmpty(final String str) {
-        return !isEmpty(str);
-    }
-
-    private static boolean isBlank(final String str) {
-        return Objects.isNull(str) || isEmpty(str.trim());
-    }
-
-    private static boolean isNotBlank(final String str) {
-        return !isBlank(str);
     }
 }

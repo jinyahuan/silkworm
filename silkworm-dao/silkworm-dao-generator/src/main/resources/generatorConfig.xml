@@ -84,7 +84,7 @@
         <!-- (0..N) table elements -->
         <!-- tableName="%": for all tables -->
         <table schema=""
-               tableName="t_test"
+               tableName="course_mybatis_curd"
                domainObjectName=""
                mapperName=""
                enableSelectByExample="true"
