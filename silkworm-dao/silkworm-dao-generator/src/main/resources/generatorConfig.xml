@@ -31,6 +31,13 @@
             <property name="template" value="src/main/resources/default-comment.ftl" />
         </plugin> -->
 
+        <plugin type="cn.jinyahuan.tool.silkworm.plugin.JavaFileCommentPlugin">
+            <property name="isAddTableInfo" value="true"/>
+            <property name="tableInfoPosition" value="top"/>
+            <property name="isAddTableFieldInfo" value="true"/>
+            <property name="tableFieldInfoPosition" value="top"/>
+        </plugin>
+
         <commentGenerator>
             <property name="suppressAllComments" value="${commentGenerator.property.suppressAllComments}"/>
             <property name="suppressDate"        value="${commentGenerator.property.suppressDate}"/>
