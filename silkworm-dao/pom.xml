@@ -20,7 +20,7 @@
         <mvn-p.compiler.conf.target>1.8</mvn-p.compiler.conf.target>
         <mvn-p.compiler.conf.encoding>UTF-8</mvn-p.compiler.conf.encoding>
 
-        <mybatis.mvn-p.generator.version>1.4.0-SNAPSHOT</mybatis.mvn-p.generator.version>
+        <mybatis.mvn-p.generator.version>1.4.0</mybatis.mvn-p.generator.version>
         <mybatis.mvn-p.generator.conf.verbose>true</mybatis.mvn-p.generator.conf.verbose>
         <mybatis.mvn-p.generator.conf.overwrite>true</mybatis.mvn-p.generator.conf.overwrite>
 

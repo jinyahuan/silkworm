@@ -26,10 +26,10 @@
             <property name="customLombok" value="@Getter,@Setter,@ToString"/>
         </plugin>
 
-        <!-- https://github.com/itfsw/mybatis-generator-plugin -->
+        <!-- https://github.com/itfsw/mybatis-generator-plugin
         <plugin type="com.itfsw.mybatis.generator.plugins.CommentPlugin">
             <property name="template" value="src/main/resources/default-comment.ftl" />
-        </plugin>
+        </plugin> -->
 
         <commentGenerator>
             <property name="suppressAllComments" value="${commentGenerator.property.suppressAllComments}"/>
