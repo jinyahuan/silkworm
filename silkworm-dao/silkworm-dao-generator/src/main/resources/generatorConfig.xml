@@ -26,9 +26,18 @@
             <property name="customLombok" value="@Getter,@Setter,@ToString"/>
         </plugin>
 
-        <!-- https://github.com/itfsw/mybatis-generator-plugin -->
+        <!-- https://github.com/itfsw/mybatis-generator-plugin
         <plugin type="com.itfsw.mybatis.generator.plugins.CommentPlugin">
             <property name="template" value="src/main/resources/default-comment.ftl" />
+        </plugin> -->
+
+        <plugin type="cn.jinyahuan.tool.silkworm.plugin.JavaFileCommentPlugin">
+            <!--<property name="commentFileName" value="E:\config\gen-java-file-comment.txt"/>-->
+            <property name="commentFileName" value="classpath:META-INF/gen-java-file-comment.txt"/>
+            <property name="isAddTableInfo" value="true"/>
+            <property name="tableInfoPosition" value="top"/>
+            <property name="isAddTableFieldInfo" value="true"/>
+            <property name="tableFieldInfoPosition" value="top"/>
         </plugin>
 
         <commentGenerator>
@@ -77,7 +86,7 @@
         <!-- (0..N) table elements -->
         <!-- tableName="%": for all tables -->
         <table schema=""
-               tableName="t_test"
+               tableName="course_mybatis_curd"
                domainObjectName=""
                mapperName=""
                enableSelectByExample="true"

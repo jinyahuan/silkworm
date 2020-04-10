@@ -1,0 +1,41 @@
+comment.java.usage1
+===
+* 用法贼简单，但是目前只支持下面3种key，有兴趣的自己修改源码
+* 2个3连=号用于标记模板的内容（相当于xml中的开始和闭合），将模板内容置于中间
+* 然后将标题置于首个三连=的上面或右边
+* 注意1: 一个模板的内容最大不能超过8KB
+* 注意2: 如果少于2行内容会忽略注释，比如第一行 /**  第二行 */ 就会忽略
+===
+
+
+comment.java.header
+===
+/* Copyright 2018-2020 The Silkworm Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+===
+
+comment.java.class
+===
+/**
+ * @author Author Name
+ * @since 2.0
+ */
+===
+
+comment.java.field
+===
+/**
+ */
+===
