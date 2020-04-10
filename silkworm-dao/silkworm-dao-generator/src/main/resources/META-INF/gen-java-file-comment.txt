@@ -1,0 +1,20 @@
+comment.java.header
+===
+/* aaaaaaaaaaaaaaaaaaa
+ *
+ */
+===
+
+comment.java.class
+===
+/**
+ * bbbbbbbbbbbbbbbb
+ */
+===
+
+comment.java.field
+===
+/**
+ * ccccccccccccccccccccccccc
+ */
+===

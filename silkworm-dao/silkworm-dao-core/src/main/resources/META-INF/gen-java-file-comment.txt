@@ -1,3 +1,13 @@
+comment.java.usage1
+===
+* 用法贼简单，但是目前只支持下面3种key，有兴趣的自己修改源码
+* 2个3连=号用于标记模板的内容（相当于xml中的开始和闭合），将模板内容置于中间
+* 然后将标题置于首个三连=的上面或右边
+* 注意1: 一个模板的内容最大不能超过8KB
+* 注意2: 如果少于2行内容会忽略注释，比如第一行 /**  第二行 */ 就会忽略
+===
+
+
 comment.java.header
 ===
 /* Copyright 2018-2020 The Silkworm Authors
@@ -27,6 +37,5 @@ comment.java.class
 comment.java.field
 ===
 /**
- *
  */
 ===

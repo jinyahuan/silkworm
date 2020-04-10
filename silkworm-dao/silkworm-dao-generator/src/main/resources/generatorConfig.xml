@@ -32,6 +32,8 @@
         </plugin> -->
 
         <plugin type="cn.jinyahuan.tool.silkworm.plugin.JavaFileCommentPlugin">
+            <!--<property name="commentFileName" value="E:\config\gen-java-file-comment.txt"/>-->
+            <property name="commentFileName" value="classpath:META-INF/gen-java-file-comment.txt"/>
             <property name="isAddTableInfo" value="true"/>
             <property name="tableInfoPosition" value="top"/>
             <property name="isAddTableFieldInfo" value="true"/>
