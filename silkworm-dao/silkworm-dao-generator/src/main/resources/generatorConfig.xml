@@ -32,12 +32,15 @@
         </plugin> -->
 
         <plugin type="cn.jinyahuan.tool.silkworm.plugin.JavaFileCommentPlugin">
-            <!--<property name="commentFileName" value="E:\config\gen-java-file-comment.txt"/>-->
-            <property name="commentFileName" value="classpath:META-INF/gen-java-file-comment.txt"/>
-            <property name="isAddTableInfo" value="true"/>
-            <property name="tableInfoPosition" value="top"/>
-            <property name="isAddTableFieldInfo" value="true"/>
-            <property name="tableFieldInfoPosition" value="top"/>
+            <property name="commentFileName" value="./src/main/resources/META-INF/silkworm-comment-config.txt"/>
+            <property name="addTableInfo" value="true"/>
+            <property name="addTableName" value="true"/>
+            <property name="addTableRemark" value="true"/>
+            <property name="tableInfoOffsetLine" value="1"/>
+            <property name="addTableColumnInfo" value="true"/>
+            <property name="addTableColumnName" value="true"/>
+            <property name="addTableColumnRemark" value="true"/>
+            <property name="tableColumnInfoOffsetLine" value="1"/>
         </plugin>
 
         <commentGenerator>
@@ -89,8 +92,8 @@
                tableName="course_mybatis_curd"
                domainObjectName=""
                mapperName=""
-               enableSelectByExample="true"
-               enableCountByExample="true"
+               enableSelectByExample="false"
+               enableCountByExample="false"
                enableDeleteByExample="false"
                enableUpdateByExample="false">
             <!-- (0..N) property elements -->

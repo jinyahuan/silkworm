@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2020 The Silkworm Authors
+ * Copyright 2018-2021 The Silkworm Authors
  */
 
 package cn.jinyahuan.tool.silkworm.plugin;
@@ -8,25 +8,56 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.ByteBuffer;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
- *
  * @author Yahuan Jin
  * @since 2.1
  */
 public class JavaFileCommentResource {
-    static final String HEADER_COMMENT = "comment.java.header";
-    static final String CLASS_COMMENT = "comment.java.class";
-    static final String FIELD_COMMENT = "comment.java.field";
+    /**
+     * java 文件顶部的注释，比如：copyright。
+     */
+    public static final String HEADER_COMMENT = "comment.java.model.header";
+    /**
+     * 类注释。
+     */
+    public static final String CLASS_COMMENT = "comment.java.model.class";
+    /**
+     * 字段注释。
+     */
+    public static final String FIELD_COMMENT = "comment.java.model.field";
+    /**
+     * 导入配置的资源文件路径。
+     */
+    public static final String RESOURCE_PATH = "_resource.path";
+    /**
+     * 导入配置的资源文件总数量。
+     */
+    public static final String RESOURCE_COUNT = "_resource.count";
 
     private static final int SPEC_SYMBOL = '=';
-    private static final String DEFAULT_FILE_NAME = "META-INF/gen-java-file-comment.txt";
-    private static final String CLASSPATH_PREFIX = "classpath:";
+    private static final String DEFAULT_FILE_NAME = "META-INF/silkworm-comment-config.txt";
 
+    /**
+     * <pre>
+     * 示例1，当前项目中的相对路径: ./src/main/resources/META-INF/silkworm-comment-config.txt
+     * 示例2，相对路径: META-INF/silkworm-comment-config.txt
+     * 示例3，绝对路径: (windows操作系统: "E:\config\silkworm-comment-config.txt")
+     * </pre>
+     */
     private String fileName;
+    /**
+     * <pre>
+     * key: {@link #HEADER_COMMENT}, {@link #CLASS_COMMENT}, {@link #FIELD_COMMENT}.
+     * 特殊的key: {@link #RESOURCE_PATH}, {@link #RESOURCE_COUNT}.
+     * </pre>
+     */
     private Map<String, String> commentConfigs;
 
     public JavaFileCommentResource() {
@@ -49,27 +80,36 @@ public class JavaFileCommentResource {
     }
 
     private void loadCommentConfig(String fileName) throws IOException {
-        File file;
-        if (fileName.startsWith(CLASSPATH_PREFIX)) {
-            String userDir = System.getProperty("user.dir");
-            String resourceDir = "/src/main/resources";
-            resourceDir = resourceDir.replaceAll("//", System.getProperty("file.separator"));
-            String userResourceDir = userDir + resourceDir;
-            file = new File(userResourceDir, fileName.replaceFirst(CLASSPATH_PREFIX, ""));
-        }
-        else {
-            file = new File(fileName);
-        }
+        commentConfigs.put(RESOURCE_PATH, fileName);
+        commentConfigs.put(RESOURCE_COUNT, "1");
+
+        File file = new File(fileName);
 
         InputStream in;
         if (file.exists()) {
             in = new FileInputStream(file);
         }
         else {
-            in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
+            Thread currentThread = Thread.currentThread();
+            Enumeration<URL> resources = currentThread.getContextClassLoader().getResources(fileName);
+
+            URL url = null;
+            int resourceCount = 0;
+            while (resources.hasMoreElements()) {
+                resourceCount++;
+                // 如果有多个，则使用第一个；如果不是预期的配置文件，则推荐使用绝对路径，或者项目中的相对路径
+                if (Objects.isNull(url)) {
+                    url = resources.nextElement();
+                }
+            }
+
+            in = url.openStream();
+
+            commentConfigs.put(RESOURCE_PATH, url.getFile());
+            commentConfigs.put(RESOURCE_COUNT, String.valueOf(resourceCount));
         }
 
-        ByteBuffer buffer = ByteBuffer.allocate(1024 * 8);
+        ByteBuffer buffer = ByteBuffer.allocate(1024 * 1024);
 
         String key = "";
         String value = "";
